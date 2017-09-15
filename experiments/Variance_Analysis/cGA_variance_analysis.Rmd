@@ -1,0 +1,24 @@
+---
+title: "cGA Variance Analysis"
+output: html_document
+---
+
+We test the null hypothesis that the sample mean is equal to a specified value μ0. The degrees of freedom used in this test are n − 1. Although the sample does not need to be normally distributed, the distribution of the observations of sample means is assumed to be normal. By the central limit theorem, if the sampling of the set of obseravtions is independent then the sample means will be approximately normal.
+
+### Results
+
+The follwing is an account of the one-sample t-test run on each sample set with a 95% confidence interval. 
+
+```{r, echo=FALSE}
+sample <- NA
+data <- read.csv(file = "cGA_variance_analysis.txt", header = TRUE, sep = " ", skip = 14)
+data$SIGMA <- as.factor(data$SIGMA)
+i <- NA
+header <- "N_FITNESS EVALUATIONS with SIGMA = "
+for (i in unique(data$SIGMA)){
+  sample <- data$N_FITNESS_EVALUATIONS[data$SIGMA == i]
+  print(paste(header, as.character(i)))
+  print(t.test(sample))
+}
+rm(data)
+```
